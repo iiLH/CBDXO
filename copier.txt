@@ -1,0 +1,14 @@
+@echo off
+title CBDXO Copier
+echo --------------------------------------------------------------
+echo Copiar blacklists modificados a un pendrive
+echo --------------------------------------------------------------
+set /p USB=escribe la unidad de tu pendrive o SD (Ejemplo: F:) :
+set /p modblacklist=Escribe el archivo de lista negra generado por CBDXO:
+cls
+echo Copiando archivos...
+copy %modblacklist% %USB%\
+copy blacklist\blacklist.sig %USB%
+echo Listo! ahora sigue los pasos de desbloqueo de la pagina del Plan Ceibal!
+pause
+exit

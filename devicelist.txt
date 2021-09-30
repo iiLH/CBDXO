@@ -1,0 +1,6 @@
+@echo off
+title LISTA DE EQUIPOS REPORTADOS
+echo Equipos:
+for /f %%a in (blacklist\devicelist.txt) do (echo %%a)
+pause
+exit

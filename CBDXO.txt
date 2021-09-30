@@ -1,0 +1,81 @@
+@echo off
+title CBDXO V 1.0
+:mmenu
+cls
+echo Ceibal Blacklist Disable eXplOit v 1.0
+echo Tiene las siguientes opciones:
+echo Numero de Serie que empiezan con CQF
+echo Numero de Serie que empiezan con CSN
+echo Numero de Serie que empiezan con SHC
+echo Numero de Serie que empiezan con SHF
+echo Crea tu propio Blacklist escribendo "blacklisteditor" (sin comillas)
+echo escribe "blacklist-template-[el serial que deseas bloquear]" (sin comillas)
+set /p comando=CBDXO-OP:
+if %comando%==blacklist-template-CQF call :cqf
+if %comando%==blacklist-template-CSN call :csn
+if %comando%==blacklist-template-SHC call :shc
+if %comando%==blacklist-template-SHF call :shf
+if %comando%==blacklisteditor call :blacklisteditor
+:cqf
+echo Copiando plantilla a la carpeta de salida...
+mkdir output
+copy templates\CQF.txt output\
+cd output
+mkdir CQF
+ren CQF.txt blacklist
+copy blacklist CQF\
+del blacklist
+pause
+cd ..
+call :mmenu
+:csn
+mkdir output
+copy templates\CSN.txt output\
+cd output
+mkdir CSN
+ren CSN.txt blacklist
+copy blacklist CSN\
+del blacklist
+pause
+cd ..
+call :mmenu
+:shc
+mkdir output
+copy templates\SHC.txt output\
+cd output
+mkdir SHC
+ren SHC.txt blacklist
+copy blacklist SHC\
+del blacklist
+cd ..
+pause
+call :mmenu
+:shf
+mkdir output
+copy templates\SHF.txt output\
+cd output
+mkdir SHF
+ren SHF.txt blacklist
+copy blacklist SHF\
+del blacklist
+cd ..
+pause
+call :mmenu
+:blacklisteditor
+title Editor de Blacklist
+echo editor de blacklist
+set /p file=archivo de guardado:
+echo ARCHIVO DE GUARDADO: %file%
+echo ------------------------------------------------------------------------------------------------------------
+echo creando archivo...
+echo ------------------------------------------------------------------------------------------------------------
+echo 20250413 > %file%
+echo 20250413 >> %file%
+echo ------------------------------------------------------------------------------------------------------------
+:editor
+set /p serial=ESCRIBE UN SERIAL QUE QUIERAS MARCAR COMO REPORTADO:
+call :writein
+:writein
+if %serial%==exit call :mmenu
+echo %serial% >> %file%
+call :editor
